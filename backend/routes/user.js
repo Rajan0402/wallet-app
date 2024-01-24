@@ -29,7 +29,9 @@ router.route("/signup")
         balance: Math.floor(Math.random() * 10000) + 1
       })
 
-      res.json({ message: `User created successfully with \u20B9${userAccount.balance}` })
+      const token = jwt.sign({ userId: user._id }, process.env.ACCESS_JWT_SECRET, { expiresIn: "1d" })
+
+      res.json({ message: `User created successfully with \u20B9${userAccount.balance}`, token })
     } catch (err) {
       res.json({ Error1: err })
     }
@@ -47,7 +49,7 @@ router.route("/signin")
       const pwdMatch = await bcrypt.compare(parsedData.data.password, userExist.password)
       if (!pwdMatch) res.status(401).json({ message: "Wrong password" })
 
-      const token = jwt.sign({ userId: userExist._id }, process.env.ACCESS_JWT_SECRET, { expiresIn: "20m" })
+      const token = jwt.sign({ userId: userExist._id }, process.env.ACCESS_JWT_SECRET, { expiresIn: "1d" })
 
       const refresh_token = jwt.sign({ userId: userExist._id }, process.env.REFRESH_JWT_SECRET, { expiresIn: "7d" })
       userExist.refresh_token = refresh_token;
