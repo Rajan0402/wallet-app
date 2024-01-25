@@ -33,7 +33,7 @@ export function SignIn() {
         </button>
         <p className="text-center">
           Don&apos;t have an account?{" "}
-          <Link to="signup" className="underline">
+          <Link to="/signup" className="underline">
             Login
           </Link>
         </p>

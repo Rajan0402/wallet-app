@@ -53,7 +53,7 @@ export function SignUp() {
         </button>
         <p className="text-center">
           Already have an account?{" "}
-          <Link to="signin" className="underline">
+          <Link to="/signin" className="underline">
             Login
           </Link>
         </p>
